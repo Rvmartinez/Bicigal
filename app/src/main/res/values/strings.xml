@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Bicigal</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="nav_header_title">Ruben Vilas</string>
+    <string name="nav_header_subtitle">rubenvilasm@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+
+    <string name="menu_home">Bicigal</string>
+    <string name="menu_gallery">Bicicletas</string>
+    <string name="menu_slideshow">Viajes</string>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>
