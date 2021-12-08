@@ -53,13 +53,18 @@ public class ViajesAdapter extends ArrayAdapter<String> {
         singleItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentBike=new Intent(context,BikeShowCurrent.class);
-                Bundle b=new Bundle();
-                b.putStringArrayList("fechas",fechas);
-                b.putInt("posicion",position);
-                b.putStringArrayList("nombre",nombresBici);
 
-                context.startActivity(intentBike,b);
+                Intent intentBike=new Intent(context,BikeShowCurrent.class);
+                //Bundle b=new Bundle();
+                intentBike.putExtra("fotoBici",imageSource);
+                intentBike.putExtra("fechas",fechas.get(position));
+                intentBike.putExtra("posicion",position);
+                intentBike.putExtra("nombre",nombresBici.get(position));
+
+
+                //context.startActivity(intentBike,b);
+                context.startActivity(intentBike);
+                // Toast.makeText(context, "aqui va la vista principal de "+fechas.get(position), Toast.LENGTH_SHORT).show();
             }
         });
 
