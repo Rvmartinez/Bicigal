@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
+import com.esei.bicigal.Database.BicigalDB;
+import com.esei.bicigal.Models.BicicletaModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -43,6 +45,12 @@ public class HomeActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        /*
+        BicigalDB db = BicigalDB.getDB(getBaseContext());
+        db.addBicicleta(new BicicletaModel("Decathlon","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
+        db.addBicicleta(new BicicletaModel("Honeywell","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
+        db.addBicicleta(new BicicletaModel("Mountainbike","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
+        */
 
     }
 

@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/biciSpecImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150sp"
+        android:layout_width="250sp"
+        android:layout_height="250sp"
+        android:layout_gravity="center"
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
@@ -175,5 +175,6 @@
                 android:text="TextView" />
         </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

@@ -1,9 +1,11 @@
 package com.esei.bicigal.ui.slideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import com.esei.bicigal.Models.ViajeModel;
 import com.esei.bicigal.ViajesAdapter;
 import com.esei.bicigal.R;
 import com.esei.bicigal.databinding.FragmentSlideshowBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -39,13 +42,21 @@ public class SlideshowFragment extends Fragment {
         nombresBicis = new ArrayList<>();
         imagePosition = new ArrayList<>();
         viajesLv = root.findViewById(R.id.viajesListView);
+
         consultDB();
         ViajesAdapter viajesAdapter = new ViajesAdapter(getContext(),fechas,imagePosition,nombresBicis);
         viajesLv.setAdapter(viajesAdapter);
 
+
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        consultDB();
+
+    }
 
     private void consultDB() {
 

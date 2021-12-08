@@ -286,4 +286,19 @@ public class BicigalDB extends SQLiteOpenHelper{
 
         return;
     }
+
+    public BicicletaModel getBiciById(int posicion){
+        BicicletaModel b = null;
+        Cursor cursor = this.getReadableDatabase().rawQuery(
+                "SELECT * FROM " + BICICLETA_SPEC_TABLE
+                        + " WHERE biciId =?",
+                new String[] {String.valueOf(posicion)});
+        if ( cursor.moveToFirst() ) {
+            b = new BicicletaModel( cursor.getString( 2 ), cursor.getString( 4 ), cursor.getString(5),cursor.getString(6),
+                    cursor.getString( 8 ),cursor.getString( 7 ),cursor.getString( 1 ),Integer.valueOf(cursor.getString( 3 )));
+        }
+        cursor.close();
+
+        return b;
+    }
 }

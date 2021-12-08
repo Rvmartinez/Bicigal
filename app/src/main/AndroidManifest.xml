@@ -40,6 +40,9 @@
         <activity android:name=".BikeShowCurrent"
             android:exported="false"/>
 
+        <activity android:name=".ui.slideshow.AddBicicletaActivity"
+            android:exported="false"/>
+
         <activity android:name=".UserEditActivity"
             android:exported="false"/>
 

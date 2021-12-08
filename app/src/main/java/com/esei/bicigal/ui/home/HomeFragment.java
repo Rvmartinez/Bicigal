@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -22,11 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.esei.bicigal.Database.BicigalDB;
-import com.esei.bicigal.HomeActivity;
 import com.esei.bicigal.Models.ViajeModel;
 import com.esei.bicigal.R;
 import com.esei.bicigal.SummaryActivity;
-import com.esei.bicigal.databinding.ActivityHomeBinding;
 import com.esei.bicigal.databinding.FragmentHomeBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
