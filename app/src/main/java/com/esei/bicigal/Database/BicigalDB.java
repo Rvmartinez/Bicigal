@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.esei.bicigal.BicicletasAdapter;
+import com.esei.bicigal.Models.BicicletaModel;
 import com.esei.bicigal.Models.UsuarioModel;
 import com.esei.bicigal.Models.ViajeModel;
 
@@ -25,6 +27,7 @@ public class BicigalDB extends SQLiteOpenHelper{
     //USUARIO
     public static final String USUARIOS_TABLE = "usuarios";
     public static final String VIAJES_TABLE = "viajes";
+    public static final String BICICLETA_SPEC_TABLE = "bicicletasSpec";
 
     public static final String NOMBRE="nombres";
     public static final String EMAIL="emails";
@@ -50,7 +53,6 @@ public class BicigalDB extends SQLiteOpenHelper{
                     + EMAIL + " text NOT NULL,"
                     + PASSWORD + " text NOT NULL"
                     + ")" );
-            db.setTransactionSuccessful();
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "+VIAJES_TABLE+"("
                     + "viajeId INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -58,6 +60,20 @@ public class BicigalDB extends SQLiteOpenHelper{
                     + "nombreBici text NOT NULL,"
                     + "imagePosition INTEGER NOT NULL"
                     + ")");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS "+BICICLETA_SPEC_TABLE+"("
+                    + "biciId INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    +"modelo text NOT NULL,"
+                    + "nombre text NOT NULL,"
+                    + "imagePosition INTEGER NOT NULL,"
+                    + "material text NOT NULL,"
+                    + "pulgadas text NOT NULL,"
+                    + "velocidades text NOT NULL,"
+                    + "tipoCuadro text NOT NULL,"
+                    + "color text"
+                    + ")");
+            db.setTransactionSuccessful();
+
         }
         finally {
             db.endTransaction();
@@ -223,6 +239,51 @@ public class BicigalDB extends SQLiteOpenHelper{
     }
 
 
+    public ArrayList<BicicletaModel> getAllBicis() {
+        ArrayList<BicicletaModel> toret = new ArrayList<>();
 
+        try {
+            Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + BICICLETA_SPEC_TABLE, null);
 
+            if (cursor.moveToFirst()) {
+                do {
+                    String biciId  = cursor.getString(0);
+                    String modelo = cursor.getString(1);
+                    String nombre = cursor.getString(2);
+                    int imagePosition = Integer.valueOf(cursor.getString(3));
+                    String material = cursor.getString(4);
+                    String pulgadas = cursor.getString(5);
+                    String velocidades = cursor.getString(6);
+                    String tipoCuadro = cursor.getString(7);
+                    String color = cursor.getString(8);
+
+                    BicicletaModel bici = new BicicletaModel(nombre, material, pulgadas, velocidades,color,tipoCuadro,modelo,imagePosition);
+                    toret.add(bici);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return toret;
+    }
+
+    public void     addBicicleta(BicicletaModel b){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+
+        try {
+            db.execSQL("INSERT INTO " + BICICLETA_SPEC_TABLE + "(modelo,nombre,imagePosition,material,pulgadas,velocidades,tipoCuadro,color) VALUES(?,?,?,?,?,?,?,?)",
+                    new String[]{b.getModelo(), b.getName(), String.valueOf(b.getImagePosition()),b.getMaterial(), b.getPulgadas(),b.getVelocidades(),b.getTipoCuadro(),b.getColor()});
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            System.out.println("error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+
+        return;
+    }
 }

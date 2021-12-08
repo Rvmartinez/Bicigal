@@ -6,7 +6,7 @@
     <string name="nav_header_title">Ruben Vilas</string>
     <string name="nav_header_subtitle">rubenvilasm@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Configuración</string>
+    <string name="action_settings">About us</string>
 
     <string name="menu_home">Bicigal</string>
     <string name="menu_gallery">Bicicletas</string>

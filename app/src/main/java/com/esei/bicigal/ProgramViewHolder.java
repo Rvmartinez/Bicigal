@@ -10,8 +10,8 @@ public class ProgramViewHolder {
     TextView nombreBiciTv;
 
     ProgramViewHolder(View v){
-        itemImage = v.findViewById(R.id.viajeImage);
-        fechaTv = v.findViewById(R.id.fechaViajeTV);
-        nombreBiciTv = v.findViewById(R.id.nombreBiciTV);
+        itemImage = v.findViewById(R.id.customImage);
+        fechaTv = v.findViewById(R.id.topsideLv);
+        nombreBiciTv = v.findViewById(R.id.bottomsideLv);
     }
 }

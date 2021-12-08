@@ -36,6 +36,12 @@
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Bicigal.NoActionBar" />
+
+        <activity android:name=".BikeShowCurrent"
+            android:exported="false"/>
+
+        <activity android:name=".ui.slideshow.BiciSpecShowCurrent"
+            android:exported="false"/>
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"

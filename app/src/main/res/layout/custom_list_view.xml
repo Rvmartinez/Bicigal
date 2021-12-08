@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,8 +7,9 @@
     android:layout_height="wrap_content"
     android:gravity="start|top">
 
+
     <ImageView
-        android:id="@+id/viajeImage"
+        android:id="@+id/customImage"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_weight="2"
@@ -20,14 +22,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/fechaViajeTV"
+            android:id="@+id/topsideLv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/nombreBiciTV"
+            android:id="@+id/bottomsideLv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -1,6 +1,8 @@
 package com.esei.bicigal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +15,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ProgramAdapter extends ArrayAdapter<String> {
+public class ViajesAdapter extends ArrayAdapter<String> {
 
     Context context;
     ArrayList<Integer> images;
     ArrayList<String> fechas;
     ArrayList<String> nombresBici;
     int[] imageSource;
-    public ProgramAdapter(@NonNull Context context, ArrayList<String> fechas, ArrayList<Integer> images, ArrayList<String> nombresBici) {
-        super(context, R.layout.custom_list_view,R.id.fechaViajeTV,fechas);
+    public ViajesAdapter(@NonNull Context context, ArrayList<String> fechas, ArrayList<Integer> images, ArrayList<String> nombresBici) {
+        super(context, R.layout.custom_list_view,R.id.topsideLv,fechas);
         this.context = context;
         this.images = images;
         this.fechas = fechas;
@@ -51,7 +53,13 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         singleItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "aqui va la vista principal de "+fechas.get(position), Toast.LENGTH_SHORT).show();
+                Intent intentBike=new Intent(context,BikeShowCurrent.class);
+                Bundle b=new Bundle();
+                b.putStringArrayList("fechas",fechas);
+                b.putInt("posicion",position);
+                b.putStringArrayList("nombre",nombresBici);
+
+                context.startActivity(intentBike,b);
             }
         });
 
