@@ -61,8 +61,13 @@ public class Register_View extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(Register_View.this);
             builder.setTitle("Usuario registrado");
+<<<<<<< HEAD
             builder.setMessage("Gracias por registrarse en Bicigal, justos haremos que Galicia sea más verde");
             builder.setPositiveButton("Gracias!", new DialogInterface.OnClickListener() {
+=======
+            builder.setMessage("Se ha realizado el registro con éxito");
+            builder.setPositiveButton("Finalizar", new DialogInterface.OnClickListener() {
+>>>>>>> 79d4eaaa1b7490662e7923f4460ca6e88a29a72c
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Register_View.this.finish();
