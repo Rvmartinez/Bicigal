@@ -2,6 +2,7 @@ package com.esei.bicigal.Login;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,9 +38,6 @@ public class Register_View extends AppCompatActivity {
 
     }
 
-    private boolean verify(){
-       return true;
-    }
     public void rellenarDatos(){
 
         EditText lyt_login = (EditText) findViewById(R.id.id_Login);
@@ -56,16 +54,15 @@ public class Register_View extends AppCompatActivity {
 
         UsuarioModel u = new UsuarioModel(nombre,email,login,password);
 
-        if(verify()){
+        if(TextUtils.isEmpty(email) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(password)){
             BicigalDB db = BicigalDB.getDB(Register_View.this.getApplicationContext());
-            //Crear usuario
-            //if(db.userNameIsAvailable(u.getNombre()))
+
             db.createUser(u);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(Register_View.this);
             builder.setTitle("Usuario registrado");
-            builder.setMessage("Recibirá el pedido en su\ndomicilio entre 30-60 minutos");
-            builder.setPositiveButton("Finalizar", new DialogInterface.OnClickListener() {
+            builder.setMessage("Gracias por registrarse en Bicigal, justos haremos que Galicia sea más verde");
+            builder.setPositiveButton("Gracias!", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Register_View.this.finish();
