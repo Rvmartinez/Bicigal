@@ -29,11 +29,11 @@ public class UserEditActivity extends AppCompatActivity {
     bt_Edit.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-           AlertDialog.Builder builder=new AlertDialog.Builder(getBaseContext());
+          /* AlertDialog.Builder builder=new AlertDialog.Builder(getBaseContext());
             builder.
             builder.setTitle("Validacion");
             builder.setMessage("Introduzca datos");
-            LayoutInflater inflater = requireActivity().getLayoutInflater();
+            LayoutInflater inflater = requireActivity().getLayoutInflater();*/
             //   BicigalDB dbHelper = new BicigalDB(this);
            // SQLiteDatabase db = dbHelper.getWritableDatabase();
             String nameAux=name.getText().toString();

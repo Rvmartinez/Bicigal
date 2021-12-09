@@ -136,14 +136,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.33"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bt_atras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Volver atrás" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
     </LinearLayout>
 </RelativeLayout>
