@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.esei.bicigal.Database.BicigalDB;
 import com.esei.bicigal.HomeActivity;
+import com.esei.bicigal.Models.UsuarioModel;
 import com.esei.bicigal.R;
 import com.esei.bicigal.SplashScreenActivity;
 
@@ -41,11 +42,15 @@ public class LoginView extends AppCompatActivity {
 
         BicigalDB  database = BicigalDB.getDB(this);
 
-        boolean exists = database.checkUser(login,password);
-        if(exists){
+        UsuarioModel user = database.checkUser(login,password);
+        if(user != null){
             Toast.makeText(this," Bienvenido a Bicigal "+login,Toast.LENGTH_LONG).show();
-            Toast.makeText(this," Bienvenido a Bicigal "+login,Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getBaseContext(), HomeActivity.class));
+            Intent in = new Intent(getBaseContext(), HomeActivity.class);
+            Bundle b = new Bundle();
+            b.putString("email",user.getLogin());
+            b.putString("nombre",user.getNombre());
+            in.putExtras(b);
+            startActivity(in);
 
         }
         else Toast.makeText(this,"NO EXISTE USUARIO",Toast.LENGTH_LONG).show();

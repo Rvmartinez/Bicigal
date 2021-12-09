@@ -1,9 +1,12 @@
 package com.esei.bicigal;
 
 import android.app.Application;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.esei.bicigal.Database.BicigalDB;
 import com.esei.bicigal.Models.BicicletaModel;
@@ -35,6 +38,18 @@ public class HomeActivity extends AppCompatActivity{
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+        View headerView = navigationView.getHeaderView(0);
+        TextView tv = headerView.findViewById(R.id.nav_header_email);
+        Bundle b = getIntent().getExtras();
+
+        if(b != null){
+            tv.setText(b.getString("email"));
+            tv = headerView.findViewById(R.id.nav_header_name);
+            tv.setText(b.getString("nombre"));
+            ImageView img = headerView.findViewById(R.id.nav_header_image);
+            img.setImageResource(R.drawable.avatar);
+
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -45,12 +60,12 @@ public class HomeActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-/*
+
         BicigalDB db = BicigalDB.getDB(getBaseContext());
         db.addBicicleta(new BicicletaModel("Decathlon","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
         db.addBicicleta(new BicicletaModel("Honeywell","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
         db.addBicicleta(new BicicletaModel("Mountainbike","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
-  */
+
 
     }
 

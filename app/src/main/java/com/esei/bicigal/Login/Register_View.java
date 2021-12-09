@@ -54,7 +54,7 @@ public class Register_View extends AppCompatActivity {
 
         UsuarioModel u = new UsuarioModel(nombre,email,login,password);
 
-        if(TextUtils.isEmpty(email) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(password)){
+        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(password)){
             BicigalDB db = BicigalDB.getDB(Register_View.this.getApplicationContext());
 
             db.createUser(u);

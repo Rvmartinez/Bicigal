@@ -1,6 +1,7 @@
 package com.esei.bicigal.Database;
 
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.esei.bicigal.BicicletasAdapter;
 import com.esei.bicigal.Models.BicicletaModel;
@@ -195,7 +197,7 @@ public class BicigalDB extends SQLiteOpenHelper{
     }
 
     //Ckecks user in db
-    public boolean checkUser(String log ,String pas){
+    public UsuarioModel checkUser(String log ,String pas){
         UsuarioModel u = null;
         try{
             Cursor cursor = this.getReadableDatabase().rawQuery(
@@ -210,7 +212,7 @@ public class BicigalDB extends SQLiteOpenHelper{
         }catch (Exception e){
             System.out.println("ERROR!!!!!!!!!!!" + e.getMessage());
         }
-        return u!=null;
+        return u;
     }
 
     public ArrayList<ViajeModel> getAllViajes(){
@@ -289,6 +291,7 @@ public class BicigalDB extends SQLiteOpenHelper{
 
     public BicicletaModel getBiciById(int posicion){
         BicicletaModel b = null;
+
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT * FROM " + BICICLETA_SPEC_TABLE
                         + " WHERE biciId =?",
@@ -300,5 +303,25 @@ public class BicigalDB extends SQLiteOpenHelper{
         cursor.close();
 
         return b;
+    }
+
+    public boolean deleteBiciById(int position) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        BicicletaModel b = null;
+        try{
+            db.beginTransaction();
+            db.execSQL(
+                    "DELETE FROM "
+                            + BICICLETA_SPEC_TABLE
+                            + " WHERE "
+                            + "biciId=?"
+                    , new String[]{String.valueOf(position)});
+            db.setTransactionSuccessful();
+        }catch(SQLException exception){
+            return false;
+        }finally {
+            db.endTransaction();
+        }
+        return true;
     }
 }

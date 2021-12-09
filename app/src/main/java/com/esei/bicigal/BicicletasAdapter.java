@@ -1,5 +1,6 @@
 package com.esei.bicigal;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.esei.bicigal.Database.BicigalDB;
 import com.esei.bicigal.Models.BicicletaModel;
@@ -73,6 +75,33 @@ public class BicicletasAdapter extends ArrayAdapter<String> {
                 context.startActivity(in);
 
             }
+        });
+
+        singleItem.setOnLongClickListener(view -> {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+
+            alertDialog.setTitle("Atención");
+            alertDialog.setMessage("Estás seguro de que quieres eliminar esta bicicleta?");
+            alertDialog.setCancelable(true);
+            alertDialog.setPositiveButton("Si",
+                    (dialogInterface, i) -> {
+                        BicigalDB db = BicigalDB.getDB(context);
+                        boolean result = db.deleteBiciById(position+1);
+                        if(result)
+                            Toast.makeText(getContext(),"Ha sido borrada",Toast.LENGTH_LONG).show();
+                        else Toast.makeText(getContext(),"No ha sido borrada",Toast.LENGTH_LONG).show();
+
+                        dialogInterface.cancel();
+                    });
+            alertDialog.setNegativeButton("No",
+                    (dialogInterface, i) -> {
+                        dialogInterface.cancel();
+                    });
+
+            alertDialog.create().show();
+            return  true;
+
+
         });
 
         return singleItem;
