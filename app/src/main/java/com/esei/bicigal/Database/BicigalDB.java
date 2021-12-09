@@ -37,7 +37,6 @@ public class BicigalDB extends SQLiteOpenHelper{
     public static final String EMAIL="emails";
     public static final String LOGIN="logins";
     public static final String PASSWORD="passwords";
-    public  static final String ADMIN ="admins";
     public static final int DATABASE_VERSION = 1;
 
     public static BicigalDB getDB(Context c){
@@ -45,7 +44,9 @@ public class BicigalDB extends SQLiteOpenHelper{
         return instance;
     }
 
-    private BicigalDB(Context context) { super( context, "DATABASE", null, DATABASE_VERSION );}
+    private BicigalDB(Context context) { super( context, "DATABASE", null, DATABASE_VERSION );
+
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -56,8 +57,7 @@ public class BicigalDB extends SQLiteOpenHelper{
                     + LOGIN + " text PRIMARY KEY,"
                     + NOMBRE + " text NOT NULL,"
                     + EMAIL + " text NOT NULL,"
-                    + PASSWORD + " text NOT NULL,"
-                    + ADMIN + "INTEGER NOT NULL"
+                    + PASSWORD + " text NOT NULL"
                     + ")" );
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "+VIAJES_TABLE+"("
@@ -143,8 +143,8 @@ public class BicigalDB extends SQLiteOpenHelper{
 
         db.beginTransaction();
         try {
-            db.execSQL("INSERT INTO " + USUARIOS_TABLE + "(" + NOMBRE + ", " + EMAIL +"," + LOGIN + "," + PASSWORD + ","+ADMIN+") VALUES(?,?,?,?,?)",
-                    new String[]{u.getNombre(), u.getEmail(), u.getLogin(), u.getPassword(), String.valueOf(u.getEsAdmin())});
+            db.execSQL("INSERT INTO " + USUARIOS_TABLE + "(" + LOGIN + ", " + NOMBRE + ", " + EMAIL + "," + PASSWORD +") VALUES(?,?,?,?)",
+                    new String[]{u.getLogin(), u.getNombre(), u.getEmail(), u.getPassword()});
             db.setTransactionSuccessful();
         }catch(Exception e){
             System.out.println("error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + e.getMessage());
@@ -230,10 +230,10 @@ public class BicigalDB extends SQLiteOpenHelper{
                     "SELECT * FROM " + USUARIOS_TABLE
                             + " WHERE " + LOGIN + "=?"  + " AND " + PASSWORD+ "=?" ,
                     new String[]{String.valueOf(log),String.valueOf(pas)});
-           int estado=cursor.getInt(4);
+
             cursor.close();
 
-            return  estado==1;
+            return true;
         }
         return false;
 
@@ -242,21 +242,21 @@ public class BicigalDB extends SQLiteOpenHelper{
 
     //Ckecks user in db
     public boolean checkUser(String log ,String pas){
+        boolean toret = false;
         UsuarioModel u = null;
         try{
             Cursor cursor = this.getReadableDatabase().rawQuery(
                     "SELECT * FROM " + USUARIOS_TABLE
                             + " WHERE " + LOGIN + "=?"  + " AND " + PASSWORD+ "=?" ,
                     new String[]{String.valueOf(log),String.valueOf(pas)});
-            if ( cursor.moveToFirst() ) {
-                u = new UsuarioModel( cursor.getString( 1 ), cursor.getString( 0 ), cursor.getString(2),cursor.getString(3) ,cursor.getInt(4));
-            }
+
+            toret=true;
             cursor.close();
 
         }catch (Exception e){
             System.out.println("ERROR!!!!!!!!!!!" + e.getMessage());
         }
-        return u!=null;
+        return toret;
     }
 
     public ArrayList<ViajeModel> getAllViajes(){

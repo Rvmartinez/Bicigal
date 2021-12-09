@@ -45,7 +45,7 @@ public class UserEditActivity extends AppCompatActivity {
             boolean estado=!nameAux.isEmpty()&&!emailAux.isEmpty()&&!passAux.isEmpty()&&!antLogAux.isEmpty()&&!antPasAux.isEmpty();
 
             if(dbHelper.checkUser(antLogAux,antPasAux)&& estado){
-               UsuarioModel u=new UsuarioModel(nameAux,emailAux,antLogAux,passAux,0);
+               UsuarioModel u=new UsuarioModel(nameAux,emailAux,antLogAux,passAux);
               UsuarioModel usu =dbHelper.grabUser(antLogAux,antPasAux);
               usu.setEmail(emailAux);
               usu.setNombre(nameAux);
