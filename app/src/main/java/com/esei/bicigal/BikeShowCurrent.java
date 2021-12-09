@@ -34,12 +34,7 @@ public class BikeShowCurrent extends AppCompatActivity {
         fecha.setText(dates);
 
         // Button btAtras=this.findViewById(R.id.bt_atras);
-      /*  btAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });*/
 
 
 

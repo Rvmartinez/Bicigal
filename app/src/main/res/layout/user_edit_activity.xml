@@ -32,24 +32,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="0.33"
-            android:weightSum="1">
+            android:weightSum="0.8">
 
             <LinearLayout
-                android:id="@+id/lyt_name"
+                android:id="@+id/lyt_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="0.2"
                 android:orientation="horizontal"
-                android:layout_weight="0.33">
+                >
 
                 <TextView
-                    android:id="@+id/txt_name"
+                    android:id="@+id/text_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nuevo nombre" />
+                    android:text="TextView" />
 
                 <EditText
-                    android:id="@+id/id_name"
+                    android:id="@+id/id_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -57,11 +58,34 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lyt_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nueva password" />
+
+                <EditText
+                    android:id="@+id/id_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lyt_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="0.33">
+                android:layout_weight="0.2"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txt_email"
@@ -79,27 +103,27 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lyt_password"
+                android:id="@+id/lyt_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="0.33">
+                android:layout_weight="0.2"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/text_pass"
+                    android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nueva password" />
+                    android:text="Nuevo nombre" />
 
                 <EditText
-                    android:id="@+id/id_password"
+                    android:id="@+id/id_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:minHeight="48dp"
                     android:text="TextView" />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
