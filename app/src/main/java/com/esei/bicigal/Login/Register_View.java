@@ -64,7 +64,7 @@ public class Register_View extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(Register_View.this);
             builder.setTitle("Usuario registrado");
-            builder.setMessage("Recibirá el pedido en su\ndomicilio entre 30-60 minutos");
+            builder.setMessage("Se ha realizado el registro con éxito");
             builder.setPositiveButton("Finalizar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

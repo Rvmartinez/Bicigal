@@ -43,7 +43,7 @@ public class LoginView extends AppCompatActivity {
 
         boolean exists = database.checkUser(login,password);
         if(exists){
-            Toast.makeText(this," EXISTE USUARIO",Toast.LENGTH_LONG).show();
+           // Toast.makeText(this," EXISTE USUARIO",Toast.LENGTH_LONG).show();
             startActivity(new Intent(getBaseContext(), HomeActivity.class));
 
         }
