@@ -43,11 +43,8 @@ public class LoginView extends AppCompatActivity {
 
         boolean exists = database.checkUser(login,password);
         if(exists){
-<<<<<<< HEAD
             Toast.makeText(this," Bienvenido a Bicigal "+login,Toast.LENGTH_LONG).show();
-=======
-           // Toast.makeText(this," EXISTE USUARIO",Toast.LENGTH_LONG).show();
->>>>>>> 79d4eaaa1b7490662e7923f4460ca6e88a29a72c
+            Toast.makeText(this," Bienvenido a Bicigal "+login,Toast.LENGTH_LONG).show();
             startActivity(new Intent(getBaseContext(), HomeActivity.class));
 
         }
