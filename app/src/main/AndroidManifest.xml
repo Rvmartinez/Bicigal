@@ -45,6 +45,13 @@
 
         <activity android:name=".UserEditActivity"
             android:exported="false"/>
+        <activity android:name=".Login.Register_View"
+            android:exported="false"/>
+        <activity android:name=".Login.LoginView"
+            android:exported="false"/>
+
+        <activity android:name=".Login.MainActivity"
+            android:exported="false"/>
 
         <activity android:name=".ui.slideshow.BiciSpecShowCurrent"
             android:exported="false"/>

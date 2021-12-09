@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.esei.bicigal.Login.MainActivity;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
@@ -19,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         splashScreen();
-        startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
+        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
     }
 
     private void splashScreen() {
