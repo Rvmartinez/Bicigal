@@ -2,6 +2,7 @@ package com.esei.bicigal.Database;
 
 import static java.sql.Types.BOOLEAN;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
@@ -18,6 +19,7 @@ import com.esei.bicigal.Models.ViajeModel;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -186,7 +188,8 @@ public class BicigalDB extends SQLiteOpenHelper{
     //METODOS PRIVADOS
     //  MÉTODOS PRIVADOS
 
-    private UsuarioModel grabUser(String log ,String pas){
+
+    public UsuarioModel grabUser(String log ,String pas){
         UsuarioModel u = null;
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT * FROM " + USUARIOS_TABLE
@@ -198,6 +201,26 @@ public class BicigalDB extends SQLiteOpenHelper{
         cursor.close();
 
         return u;
+    }
+    public boolean editarUsuario(String login, String nuevoNombre, String nuevoEmail, String nuevaPass)throws SQLException{
+        boolean editado = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(NOMBRE, nuevoNombre);
+        values.put(EMAIL, nuevoEmail);
+        values.put(PASSWORD,nuevaPass);
+
+        try{
+            db.beginTransaction();
+            db.update(USUARIOS_TABLE, values, LOGIN+"=?", new String[]{login});
+            db.setTransactionSuccessful();
+            editado = true;
+        } finally{
+            db.endTransaction();
+        }
+        return editado;
+
     }
     //Check if is admin
     public boolean isAdmin(String log,String pas){
