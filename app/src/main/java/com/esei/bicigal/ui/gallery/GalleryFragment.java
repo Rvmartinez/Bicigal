@@ -1,5 +1,6 @@
 package com.esei.bicigal.ui.gallery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,9 @@ import com.esei.bicigal.R;
 import com.esei.bicigal.ViajesAdapter;
 import com.esei.bicigal.databinding.FragmentGalleryBinding;
 import com.esei.bicigal.databinding.FragmentSlideshowBinding;
+import com.esei.bicigal.ui.slideshow.AddBicicletaActivity;
 import com.esei.bicigal.ui.slideshow.SlideshowViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -51,14 +54,22 @@ public class GalleryFragment extends Fragment {
         imagePosition = new ArrayList<>();
         modeloBicis = new ArrayList<>();
         bicicletasLv = root.findViewById(R.id.bicicletasListView);
-        BicigalDB database = BicigalDB.getDB(getActivity().getApplicationContext());
-        consultDB();
-        Toast.makeText(getContext(),"Hay "+modeloBicis.size()+" bicis",Toast.LENGTH_SHORT).show();
+
 
         BicicletasAdapter bicicletasAdapter = new BicicletasAdapter(getContext(),modeloBicis,imagePosition,nombresBicis);
         bicicletasLv.setAdapter(bicicletasAdapter);
-
+        FloatingActionButton fab = root.findViewById(R.id.addBiciFAB);
+        fab.setOnClickListener(view -> {
+            Intent in = new Intent(getContext(), AddBicicletaActivity.class);
+            startActivity(in);
+        });
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        consultDB();
     }
 
     private void consultDB() {
@@ -80,5 +91,12 @@ public class GalleryFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onResume() {
+        consultDB();
+        super.onResume();
+    }
+
 }
 
