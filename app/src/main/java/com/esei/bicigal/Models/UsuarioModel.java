@@ -7,7 +7,7 @@ public class UsuarioModel {
     private String password;
     private int esAdmin;
 
-    public UsuarioModel(String nombre, String email, String login, String password) {
+    public UsuarioModel(String nombre, String email, String login, String password,int esAdmin) {
         this.nombre = nombre;
         this.email = email;
         this.login = login;
@@ -15,7 +15,8 @@ public class UsuarioModel {
         this.esAdmin =esAdmin;
     }
 
-
+    public int getEsAdmin(){return esAdmin;}
+    public void setEsAdmin(int esAdmin){this.esAdmin=esAdmin;}
 
 
     public String getNombre() {

@@ -1,9 +1,11 @@
 package com.esei.bicigal;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 
 import com.esei.bicigal.Database.BicigalDB;
 import com.esei.bicigal.Models.BicicletaModel;
@@ -27,7 +29,6 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -51,6 +52,15 @@ public class HomeActivity extends AppCompatActivity{
         db.addBicicleta(new BicicletaModel("Honeywell","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
         db.addBicicleta(new BicicletaModel("Mountainbike","Fibra de carbono","17","5","rojo","Flexible","xc12c",1));
         */
+
+        Button btnEditarUsuario = (Button) findViewById(R.id.btn_editarUsuario);
+        btnEditarUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                Intent intent= new Intent(HomeActivity.this, UserEditActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

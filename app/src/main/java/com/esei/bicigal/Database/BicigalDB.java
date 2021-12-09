@@ -38,7 +38,7 @@ public class BicigalDB extends SQLiteOpenHelper{
     public static final String LOGIN="logins";
     public static final String PASSWORD="passwords";
     public static final int DATABASE_VERSION = 1;
-
+    private SQLiteDatabase db;
     public static BicigalDB getDB(Context c){
         if(instance == null) instance = new BicigalDB(c);
         return instance;
@@ -50,6 +50,7 @@ public class BicigalDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        this.db = db;
         db.beginTransaction();
         try{
             //  TABLA USUARIOS
@@ -347,4 +348,28 @@ public class BicigalDB extends SQLiteOpenHelper{
 
         return b;
     }
+
+    //Recibe login del usuario a editar y los nuevos valores que se quieren sustituir por los
+    //anteriores y los modifica en la base de datos, devolviendo true si se modifico correctamente
+    public boolean editUser(String login, String nuevoNombre, String nuevoEmail, String nuevaPass){
+        boolean editado = false;
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(NOMBRE, nuevoNombre);
+        values.put(EMAIL, nuevoEmail);
+        values.put(PASSWORD,nuevaPass);
+
+        try{
+            db.beginTransaction();
+            db.update(USUARIOS_TABLE, values, LOGIN+"=?", new String[]{login});
+            db.setTransactionSuccessful();
+            editado = true;
+        } finally{
+            db.endTransaction();
+        }
+        return editado;
+
+    }
+
 }
