@@ -42,14 +42,14 @@ public class AddBicicletaActivity extends AppCompatActivity {
             String tipoCuadro = ed.getText().toString();
 
             BicigalDB db = BicigalDB.getDB(getBaseContext());
-            if(TextUtils.isEmpty(tipoCuadro)  && TextUtils.isEmpty(nombre) && TextUtils.isEmpty(velocidades) && TextUtils.isEmpty(pulgadas) && TextUtils.isEmpty(modelo) && TextUtils.isEmpty(color) && TextUtils.isEmpty(material)){
+            if(!TextUtils.isEmpty(tipoCuadro)  && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(velocidades) && !TextUtils.isEmpty(pulgadas) && !TextUtils.isEmpty(modelo) && !TextUtils.isEmpty(color) && !TextUtils.isEmpty(material)){
                 db.addBicicleta(new BicicletaModel(nombre,material,pulgadas,velocidades,color,tipoCuadro,modelo,new Random().nextInt(3)));
                 finish();
             }
-            else Toast.makeText(getBaseContext(),"hellothere",Toast.LENGTH_LONG).show();
+            else Toast.makeText(getBaseContext(),"Por favor, ingresa valores válidos en todos los campos.",Toast.LENGTH_LONG).show();
 
         });
 
     }
-    
+
 }
