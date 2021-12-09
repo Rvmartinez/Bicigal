@@ -11,9 +11,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.esei.bicigal.Database.BicigalDB;
+import com.esei.bicigal.Models.BicicletaModel;
+import com.esei.bicigal.ui.slideshow.BiciSpecShowCurrent;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class ViajesAdapter extends ArrayAdapter<String> {
 
@@ -46,7 +51,7 @@ public class ViajesAdapter extends ArrayAdapter<String> {
             holder = (ProgramViewHolder) singleItem.getTag();
         }
 
-        holder.itemImage.setImageResource(R.drawable.decathlon_basica);
+        holder.itemImage.setImageResource(imageSource[new Random().nextInt(3)]);
         holder.fechaTv.setText(fechas.get(position));
         holder.nombreBiciTv.setText(nombresBici.get(position));
 
@@ -55,12 +60,11 @@ public class ViajesAdapter extends ArrayAdapter<String> {
             public void onClick(View v) {
 
                 Intent intentBike=new Intent(context,BikeShowCurrent.class);
-                //Bundle b=new Bundle();
-                intentBike.putExtra("fotoBici",imageSource);
-                intentBike.putExtra("fechas",fechas.get(position));
-                intentBike.putExtra("posicion",position);
-                intentBike.putExtra("nombre",nombresBici.get(position));
-
+                Bundle b=new Bundle();
+                b.putString("fechas",fechas.get(position));
+                b.putInt("posicion",position);
+                b.putString("nombre",nombresBici.get(position));
+                intentBike.putExtras(b);
 
                 //context.startActivity(intentBike,b);
                 context.startActivity(intentBike);

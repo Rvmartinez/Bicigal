@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -99,6 +100,7 @@ public class BicicletasAdapter extends ArrayAdapter<String> {
                     });
 
             alertDialog.create().show();
+
             return  true;
 
 

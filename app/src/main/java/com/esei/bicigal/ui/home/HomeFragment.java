@@ -47,6 +47,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback,View.OnClickListener {
@@ -179,12 +180,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,View.On
                         });
                         endRide.setOnClickListener(v -> {
                             chronometer.stop();
+                            chronometer.setVisibility(View.GONE);
+                            endRide.setVisibility(View.GONE);
+                            startRide.setVisibility(View.VISIBLE);
                             long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
                             long seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedMillis);
                             endMarker = currentLocation;
                             BicigalDB database = BicigalDB.getDB(getActivity().getApplicationContext());
                             String fecha = String.valueOf(Calendar.getInstance().getTime());
-                            database.addViaje(new ViajeModel(fecha,"bici1",1));
+                            database.addViaje(new ViajeModel(fecha,"XC12C",new Random().nextInt(3)));
                             float[] distancia = new float[1];
                             Location.distanceBetween(startMarker.latitude,startMarker.longitude,endMarker.latitude,endMarker.longitude,distancia);
                             Intent in = new Intent(getContext(), SummaryActivity.class);
