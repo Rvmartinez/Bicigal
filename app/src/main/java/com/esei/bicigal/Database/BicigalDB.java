@@ -1,5 +1,7 @@
 package com.esei.bicigal.Database;
 
+import static java.sql.Types.BOOLEAN;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
@@ -33,6 +35,7 @@ public class BicigalDB extends SQLiteOpenHelper{
     public static final String EMAIL="emails";
     public static final String LOGIN="logins";
     public static final String PASSWORD="passwords";
+    public  static final String ADMIN ="admins";
     public static final int DATABASE_VERSION = 1;
 
     public static BicigalDB getDB(Context c){
@@ -51,7 +54,8 @@ public class BicigalDB extends SQLiteOpenHelper{
                     + LOGIN + " text PRIMARY KEY,"
                     + NOMBRE + " text NOT NULL,"
                     + EMAIL + " text NOT NULL,"
-                    + PASSWORD + " text NOT NULL"
+                    + PASSWORD + " text NOT NULL,"
+                    + ADMIN + "INTEGER NOT NULL"
                     + ")" );
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "+VIAJES_TABLE+"("
@@ -108,8 +112,10 @@ public class BicigalDB extends SQLiteOpenHelper{
                     String name = cursor.getString(1);
                     String log = cursor.getString(2);
                     String pas = cursor.getString(3);
+                    String esa=cursor.getString(4);
 
-                    UsuarioModel u = new UsuarioModel(name, cor, log,pas);
+
+                    UsuarioModel u = new UsuarioModel(name, cor, log,pas,Integer.valueOf(esa));
                     toret.add(u);
                 } while (cursor.moveToNext());
             }
@@ -135,8 +141,8 @@ public class BicigalDB extends SQLiteOpenHelper{
 
         db.beginTransaction();
         try {
-            db.execSQL("INSERT INTO " + USUARIOS_TABLE + "(" + NOMBRE + ", " + EMAIL +"," + LOGIN + "," + PASSWORD + ") VALUES(?,?,?,?)",
-                    new String[]{u.getNombre(), u.getEmail(), u.getLogin(), u.getPassword()});
+            db.execSQL("INSERT INTO " + USUARIOS_TABLE + "(" + NOMBRE + ", " + EMAIL +"," + LOGIN + "," + PASSWORD + ","+ADMIN+") VALUES(?,?,?,?,?)",
+                    new String[]{u.getNombre(), u.getEmail(), u.getLogin(), u.getPassword(), String.valueOf(u.getEsAdmin())});
             db.setTransactionSuccessful();
         }catch(Exception e){
             System.out.println("error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + e.getMessage());
@@ -153,7 +159,7 @@ public class BicigalDB extends SQLiteOpenHelper{
                 "SELECT * FROM " + VIAJES_TABLE
                         + " WHERE viajeId = "+id,new String[]{id});
         if ( cursor.moveToFirst() ) {
-            u = new ViajeModel(cursor.getString( 1 ), cursor.getString(2),Integer.valueOf(cursor.getString(3)) );
+            u = new ViajeModel(cursor.getString( 1 ), cursor.getString(2),Integer.valueOf(cursor.getString(3)));
         }
         cursor.close();
 
@@ -187,12 +193,29 @@ public class BicigalDB extends SQLiteOpenHelper{
                         + " WHERE " + LOGIN + log  + PASSWORD+ " ?= ",
                 new String[] {pas});
         if ( cursor.moveToFirst() ) {
-            u = new UsuarioModel( cursor.getString( 1 ), cursor.getString( 0 ), cursor.getString(2),cursor.getString(3) );
+            u = new UsuarioModel( cursor.getString( 1 ), cursor.getString( 0 ), cursor.getString(2),cursor.getString(3),cursor.getInt(4));
         }
         cursor.close();
 
         return u;
     }
+    //Check if is admin
+    public boolean isAdmin(String log,String pas){
+        if(checkUser(log,pas)){
+
+            Cursor cursor = this.getReadableDatabase().rawQuery(
+                    "SELECT * FROM " + USUARIOS_TABLE
+                            + " WHERE " + LOGIN + "=?"  + " AND " + PASSWORD+ "=?" ,
+                    new String[]{String.valueOf(log),String.valueOf(pas)});
+           int estado=cursor.getInt(4);
+            cursor.close();
+
+            return  estado==1;
+        }
+        return false;
+
+    }
+
 
     //Ckecks user in db
     public boolean checkUser(String log ,String pas){
@@ -203,7 +226,7 @@ public class BicigalDB extends SQLiteOpenHelper{
                             + " WHERE " + LOGIN + "=?"  + " AND " + PASSWORD+ "=?" ,
                     new String[]{String.valueOf(log),String.valueOf(pas)});
             if ( cursor.moveToFirst() ) {
-                u = new UsuarioModel( cursor.getString( 1 ), cursor.getString( 0 ), cursor.getString(2),cursor.getString(3) );
+                u = new UsuarioModel( cursor.getString( 1 ), cursor.getString( 0 ), cursor.getString(2),cursor.getString(3) ,cursor.getInt(4));
             }
             cursor.close();
 

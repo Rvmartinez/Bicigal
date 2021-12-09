@@ -54,7 +54,7 @@ public class Register_View extends AppCompatActivity {
         EditText lyt_password = (EditText)  findViewById(R.id.id_Password);
         String password = lyt_password.getText().toString();
 
-        UsuarioModel u = new UsuarioModel(nombre,email,login,password);
+        UsuarioModel u = new UsuarioModel(nombre,email,login,password,0);
 
         if(verify()){
             BicigalDB db = BicigalDB.getDB(Register_View.this.getApplicationContext());
